@@ -12,6 +12,7 @@
 - Scrapy分布式爬虫打造搜索引擎-（八）elasticsearch结合django搭建搜索引擎
 
 Github版托管地址: http://blog.mtianyan.cn/
+
 码云版托管地址: http://mtianyan.gitee.io
 
 采用hexo强力驱动，Github与码云分别托管孪生版本，主题 Next。
