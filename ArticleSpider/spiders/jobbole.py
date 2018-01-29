@@ -25,7 +25,7 @@ class JobboleSpider(scrapy.Spider):
     # 收集伯乐在线所有404的url以及404页面数
     handle_httpstatus_list = [404]
 
-    def __init__(self):
+    def __init__(self,**kwargs):
         self.fail_urls = []
         dispatcher.connect(self.handle_spider_cosed, signals.spider_closed)
 

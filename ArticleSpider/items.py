@@ -13,6 +13,15 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Join
 from w3lib.html import remove_tags
+from ArticleSpider.models.es_jobbole import ArticleType
+from models.es_lagou import LagouType
+from models.es_zhihu import ZhiHuQuestionType, ZhiHuAnswerType
+from elasticsearch_dsl.connections import connections
+# 与es进行连接生成搜索建议
+es_article = connections.create_connection(ArticleType._doc_type.using)
+es_zhihu_question = connections.create_connection(ZhiHuQuestionType._doc_type.using)
+es_lagou = connections.create_connection(LagouType._doc_type.using)
+es_zhihu_anwser = connections.create_connection(ZhiHuAnswerType._doc_type.using)
 
 
 class ArticlespiderItem(scrapy.Item):
@@ -21,9 +30,31 @@ class ArticlespiderItem(scrapy.Item):
     pass
 
 
+def gen_suggests(es_con,index, info_tuple):
+    es = es_con
+    # 根据字符串生成搜索建议数组
+    used_words = set()
+    # 去重以先来的为主
+    suggests = []
+    for text, weight in info_tuple:
+        if text:
+            # 调用es的analyze接口分析字符串：分词并做大小写的转换
+            words = es.indices.analyze(index=index, analyzer="ik_max_word", params={'filter':["lowercase"]}, body=text)
+            anylyzed_words = set([r["token"] for r in words["tokens"] if len(r["token"])>1])
+            new_words = anylyzed_words - used_words
+        else:
+            new_words = set()
+
+        if new_words:
+            suggests.append({"input":list(new_words), "weight":weight})
+
+    return suggests
+
+
 # 字符串转换时间方法
 def date_convert(value):
     try:
+        value.strip().replace("·", "").strip()
         create_date = datetime.datetime.strptime(value, "%Y/%m/%d").date()
     except Exception as e:
         create_date = datetime.datetime.now().date()
@@ -135,7 +166,7 @@ class FangItem(scrapy.Item):
             self["crawl_time"])
         return insert_sql, params
 
-
+# 伯乐在线items类
 class JobBoleArticleItem(scrapy.Item):
     title = scrapy.Field()
     create_date = scrapy.Field(
@@ -168,13 +199,11 @@ class JobBoleArticleItem(scrapy.Item):
     def make_data_clean(self):
         front_image_url = ""
         # content = remove_tags(self["content"])
-        self["crawl_time"] = datetime.datetime.now(
-        ).strftime(SQL_DATETIME_FORMAT)
+        self["crawl_time"] = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         if self["front_image_url"]:
             self["front_image_url"] = self["front_image_url"][0]
         str = self["create_date"].strip().replace("·", "").strip()
-        self["create_date"] = datetime.datetime.strptime(
-            str, "%Y/%m/%d").date()
+        self["create_date"] = datetime.datetime.strptime(str, "%Y/%m/%d").date()
         nums = 0
         value = self["praise_nums"]
         match_re = re.match(".*?(\d+).*", value)
@@ -207,6 +236,28 @@ class JobBoleArticleItem(scrapy.Item):
         )
         return insert_sql, params
 
+    # 保存伯乐在线文章到es中
+    def save_to_es(self):
+        self.make_data_clean()
+        article = ArticleType()
+        article.title = self['title']
+        article.create_date = self["create_date"]
+        article.content = remove_tags(self["content"])
+        article.front_image_url = self["front_image_url"]
+        if "front_image_path" in self:
+            article.front_image_path = self["front_image_path"]
+        article.praise_nums = self["praise_nums"]
+        article.fav_nums = self["fav_nums"]
+        article.comment_nums = self["comment_nums"]
+        article.url = self["url"]
+        article.tags = self["tags"]
+        article.meta.id = self["url_object_id"]
+
+        # 在保存数据时便传入suggest
+        article.suggest = gen_suggests(es_article,ArticleType._doc_type.index, ((article.title, 10), (article.tags, 7),(article.content, 3)))
+
+        article.save()
+
 
 class ZhihuQuestionItem(scrapy.Item):
     # 知乎的问题 item
@@ -223,6 +274,30 @@ class ZhihuQuestionItem(scrapy.Item):
     click_num = scrapy.Field()
     crawl_time = scrapy.Field()
 
+    def make_data_clean(self):
+        self["zhihu_id"] = self["zhihu_id"][0]
+        self["topics"] = ",".join(self["topics"])
+        self["url"] = self["url"][0]
+        self["title"] = "".join(self["title"])
+        try:
+            self["content"] = "".join(self["content"])
+            self["content"] = remove_tags(self["content"])
+        except BaseException:
+            self["content"] = "无"
+        self["answer_num"] = extract_num("".join(self["answer_num"]))
+        self["comments_num"] = extract_num("".join(self["comments_num"]))
+
+        if len(self["watch_user_num"]) == 2:
+            watch_user_num_click = self["watch_user_num"]
+            self["watch_user_num"] = extract_num(watch_user_num_click[0])
+            self["click_num"] = extract_num(watch_user_num_click[1])
+        else:
+            watch_user_num_click = self["watch_user_num"]
+            self["watch_user_num"] = extract_num(watch_user_num_click[0])
+            self["click_num"] = 0
+
+        self["crawl_time"] = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
+
     def get_insert_sql(self):
         # 插入知乎question表的sql语句
         insert_sql = """
@@ -233,40 +308,38 @@ class ZhihuQuestionItem(scrapy.Item):
             ON DUPLICATE KEY UPDATE content=VALUES(content), answer_num=VALUES(answer_num), comments_num=VALUES(comments_num),
               watch_user_num=VALUES(watch_user_num), click_num=VALUES(click_num)
         """
-        zhihu_id = self["zhihu_id"][0]
-        topics = ",".join(self["topics"])
-        url = self["url"][0]
-        title = "".join(self["title"])
-        try:
-            content = "".join(self["content"])
-        except BaseException:
-            content = "无"
-        answer_num = extract_num("".join(self["answer_num"]))
-        comments_num = extract_num("".join(self["comments_num"]))
-
-        if len(self["watch_user_num"]) == 2:
-            watch_user_num = extract_num(self["watch_user_num"][0])
-            click_num = extract_num(self["watch_user_num"][1])
-        else:
-            watch_user_num = extract_num(self["watch_user_num"][0])
-            click_num = 0
-
-        crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
-
+        self.make_data_clean()
         params = (
-            zhihu_id,
-            topics,
-            url,
-            title,
-            content,
-            answer_num,
-            comments_num,
-            watch_user_num,
-            click_num,
-            crawl_time)
+            self["zhihu_id"],
+            self["topics"],
+            self["url"],
+            self["title"],
+            self["content"],
+            self["answer_num"],
+            self["comments_num"],
+            self["watch_user_num"],
+            self["click_num"],
+            self["crawl_time"])
 
         return insert_sql, params
+    def save_to_es(self):
+        self.make_data_clean()
+        zhihu = ZhiHuQuestionType()
+        zhihu.zhihu_id = self["zhihu_id"]
+        zhihu.topics = self["topics"]
+        zhihu.url = self["url"]
+        zhihu.title = self["title"]
+        zhihu.content = self["content"]
+        zhihu.answer_num = self["answer_num"]
+        zhihu.comments_num = self["comments_num"]
+        zhihu.watch_user_num = self["watch_user_num"]
+        zhihu.click_num = self["click_num"]
+        zhihu.crawl_time = self["crawl_time"]
 
+         # 在保存数据时便传入suggest
+        zhihu.suggest = gen_suggests(es_zhihu_question,ZhiHuQuestionType._doc_type.index, ((zhihu.title, 10), (zhihu.topics, 7),(zhihu.content, 3)))
+
+        zhihu.save()
 
 class ZhihuAnswerItem(scrapy.Item):
     # 知乎的问题回答item
@@ -282,6 +355,14 @@ class ZhihuAnswerItem(scrapy.Item):
     crawl_time = scrapy.Field()
     author_name = scrapy.Field()
 
+    def make_data_clean(self):
+        self["create_time"] = datetime.datetime.fromtimestamp(
+            self["create_time"]).strftime(SQL_DATETIME_FORMAT)
+        self["update_time"] = datetime.datetime.fromtimestamp(
+            self["update_time"]).strftime(SQL_DATETIME_FORMAT)
+        self["crawl_time"] = self["crawl_time"].strftime(SQL_DATETIME_FORMAT)
+        self["content"] = remove_tags(self["content"])
+
     def get_insert_sql(self):
         # 插入知乎answer表的sql语句
         insert_sql = """
@@ -291,21 +372,36 @@ class ZhihuAnswerItem(scrapy.Item):
               ON DUPLICATE KEY UPDATE content=VALUES(content), comments_num=VALUES(comments_num), praise_num=VALUES(praise_num),
               update_time=VALUES(update_time), author_name=VALUES(author_name)
         """
-
-        create_time = datetime.datetime.fromtimestamp(
-            self["create_time"]).strftime(SQL_DATETIME_FORMAT)
-        update_time = datetime.datetime.fromtimestamp(
-            self["update_time"]).strftime(SQL_DATETIME_FORMAT)
+        self.make_data_clean()
         params = (
             self["zhihu_id"], self["url"], self["question_id"],
             self["author_id"], self["content"], self["praise_num"],
-            self["comments_num"], create_time, update_time,
-            self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
+            self["comments_num"], self["create_time"], self["update_time"],
+            self["crawl_time"],
             self["author_name"],
         )
 
         return insert_sql, params
+    def save_to_es(self):
+        self.make_data_clean()
+        zhihu = ZhiHuAnswerType()
+        zhihu.zhihu_id = self["zhihu_id"]
+        zhihu.url = self["url"]
+        zhihu.question_id = self["question_id"]
+        zhihu.author_id = self["author_id"]
+        zhihu.content = self["content"]
+        zhihu.praise_num = self["praise_num"]
+        zhihu.comments_num = self["comments_num"]
+        zhihu.create_time = self["create_time"]
+        zhihu.update_time = self["update_time"]
+        zhihu.crawl_time = self["crawl_time"]
+        zhihu.author_name = self["author_name"]
 
+        # 在保存数据时便传入suggest
+        zhihu.suggest = gen_suggests(es_zhihu_anwser,ZhiHuAnswerType._doc_type.index,
+                                     ((zhihu.author_name, 10), (zhihu.content, 7)))
+
+        zhihu.save()
 
 def remove_splash(value):
     # 去掉工作城市的斜线
@@ -355,16 +451,8 @@ class LagouJobItem(scrapy.Item):
         input_processor=Join(",")
     )
     crawl_time = scrapy.Field()
-    crawl_update_time = scrapy.Field()
 
-    def get_insert_sql(self):
-        insert_sql = """
-            insert into lagou_job(title, url, url_object_id, salary_min, salary_max, job_city, work_years_min, work_years_max, degree_need,
-            job_type, publish_time, job_advantage, job_desc, job_addr, company_name, company_url,
-            tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON DUPLICATE KEY UPDATE salary_min=VALUES(salary_min), salary_max=VALUES(salary_max), job_desc=VALUES(job_desc)
-        """
-
+    def make_data_clean(self):
         match_obj1 = re.match("经验(\d+)-(\d+)年", self['work_years_min'])
         match_obj2 = re.match("经验应届毕业生", self['work_years_min'])
         match_obj3 = re.match("经验不限", self['work_years_min'])
@@ -385,7 +473,7 @@ class LagouJobItem(scrapy.Item):
             self['work_years_max'] = match_obj4.group(1)
         elif match_obj5:
             self['work_years_min'] = match_obj4.group(1)
-            self['work_years_max'] = match_obj4.group(1) + 100
+            self['work_years_max'] = match_obj4.group(1)+100
         else:
             self['work_years_min'] = 999
             self['work_years_max'] = 999
@@ -420,7 +508,16 @@ class LagouJobItem(scrapy.Item):
         else:
             self["publish_time"] = datetime.datetime.now(
             ).strftime(SQL_DATETIME_FORMAT)
+        self["crawl_time"] = self["crawl_time"].strftime(SQL_DATETIME_FORMAT)
 
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into lagou_job(title, url, url_object_id, salary_min, salary_max, job_city, work_years_min, work_years_max, degree_need,
+            job_type, publish_time, job_advantage, job_desc, job_addr, company_name, company_url,
+            tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE salary_min=VALUES(salary_min), salary_max=VALUES(salary_max), job_desc=VALUES(job_desc)
+        """
+        self.make_data_clean()
         params = (
             self["title"],
             self["url"],
@@ -439,7 +536,37 @@ class LagouJobItem(scrapy.Item):
             self["company_name"],
             self["company_url"],
             self["tags"],
-            self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
+            self["crawl_time"]
         )
 
         return insert_sql, params
+
+     # 保存拉勾网职位到es中
+    def save_to_es(self):
+        self.make_data_clean()
+        job = LagouType()
+        job.title = self["title"]
+        job.url = self["url"]
+        job.url_object_id = self["url_object_id"]
+        job.salary_min = self["salary_min"]
+        job.salary_max = self["salary_max"]
+        job.job_city = self["job_city"]
+        job.work_years_min = self["work_years_min"]
+        job.work_years_max = self["work_years_max"]
+        job.degree_need = self["degree_need"]
+        job.job_desc = remove_tags(self["job_desc"]).strip().replace("\r\n", "").replace("\t", "")
+        job.job_advantage = self["job_advantage"]
+        job.tags = self["tags"]
+        job.job_type = self["job_type"]
+        job.publish_time = self["publish_time"]
+        job.job_addr = self["job_addr"]
+        job.company_name = self["company_name"]
+        job.company_url = self["company_url"]
+        job.crawl_time = self['crawl_time']
+
+        # 在保存数据时便传入suggest
+        job.suggest = gen_suggests(es_lagou, LagouType._doc_type.index,
+                                     ((job.title, 10), (job.tags, 7), (job.job_advantage, 6),(job.job_desc,5),(job.job_addr, 4),(job.company_name,8),(job.degree_need,3),(job.job_city,9)))
+
+        job.save()
+

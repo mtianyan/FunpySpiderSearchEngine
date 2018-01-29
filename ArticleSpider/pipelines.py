@@ -143,27 +143,5 @@ class ElasticSearchPipeline(object):
     # 将伯乐在线数据写入到es中
     def process_item(self, item, spider):
         # 将item转换为es数据。
-        article = ArticleType()
-        article.title = item["title"]
-        article.create_date = item["create_date"]
-        article.content = remove_tags(
-            item["content"]).strip().replace(
-            "\r\n",
-            "").replace(
-            "\t",
-            "")
-        article.front_image_url = item["front_image_url"]
-        if "front_image_path" in item:
-            article.front_image_path = item["front_image_path"]
-        article.praise_nums = item["praise_nums"]
-        article.comment_nums = item["comment_nums"]
-        article.fav_nums = item["fav_nums"]
-        article.url = item["url"]
-        article.tags = item["tags"]
-        article.id = item["url_object_id"]
-
-        # title_suggest = self.gen_suggests(article.title, article.tags)
-        # article.title_suggest = title_suggest
-
-        article.save()
+        item.save_to_es()
         return  item

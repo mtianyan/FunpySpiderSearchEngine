@@ -94,10 +94,10 @@ ITEM_PIPELINES = {
     #  'ArticleSpider.pipelines.MysqlPipeline': 5,
 
     # 使用异步通用方式写入数据库
-    'ArticleSpider.pipelines.MysqlTwistedPipeline': 6,
+    # 'ArticleSpider.pipelines.MysqlTwistedPipeline': 6,
 
-    # 将伯乐在线数据存入es中
-    # 'ArticleSpider.pipelines.ElasticSearchPipeline': 7,
+    # 将数据存入es中
+    'ArticleSpider.pipelines.ElasticSearchPipeline': 7,
 }
 
 # 设置哪个字段是图片
@@ -105,6 +105,9 @@ IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(project_dir, 'images')
 
+import sys
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'ArticleSpider'))
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import datetime
 import json
 import re
 
@@ -125,7 +125,7 @@ class ZhihuSpider(scrapy.Spider):
             answer_item["comments_num"] = answer["comment_count"]
             answer_item["create_time"] = answer["created_time"]
             answer_item["update_time"] = answer["updated_time"]
-            answer_item["crawl_time"] = datetime.datetime.now()
+            answer_item["crawl_time"] = datetime.now()
 
             yield answer_item
 
