@@ -1,3 +1,3 @@
-# _*_ coding: utf-8 _*_
+# encoding: utf-8
 __author__ = 'mtianyan'
-__date__ = '2017/6/22 20:55'
+__date__ = '2018/1/18 0018 03:52'

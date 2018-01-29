@@ -12,6 +12,7 @@ from elasticsearch_dsl.analysis import CustomAnalyzer as _CustomAnalyzer
 from elasticsearch_dsl.connections import connections
 connections.create_connection(hosts=["localhost"])
 
+
 class CustomAnalyzer(_CustomAnalyzer):
     def get_analysis_definition(self):
         return {}
@@ -19,14 +20,17 @@ class CustomAnalyzer(_CustomAnalyzer):
 
 ik_analyzer = CustomAnalyzer("ik_max_word", filter=["lowercase"])
 
+
 class LagouType(DocType):
     suggest = Completion(analyzer=ik_analyzer)
     title = Text(analyzer="ik_max_word")
-    url =  Keyword()
+    url = Keyword()
     url_object_id = Keyword()
-    salary = Text(analyzer="ik_max_word")
+    salary_min = Text(analyzer="ik_max_word")
+    salary_max = Text(analyzer="ik_max_word")
     job_city = Keyword()
-    work_years = Text(analyzer="ik_max_word")
+    work_years_min = Text(analyzer="ik_max_word")
+    work_years_max = Text(analyzer="ik_max_word")
     degree_need = Text(analyzer="ik_max_word")
     job_type = Keyword()
     publish_time = Text(analyzer="ik_max_word")
