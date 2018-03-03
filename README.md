@@ -1,18 +1,19 @@
-# 2018.2: ArticleSpider
+# 2018.3: ArticleSpider-mysql
 
 [![Build Status](https://travis-ci.org/mtianyan/hexoBlog-Github.svg?branch=master)](https://travis-ci.org/mtianyan/hexoBlog-Github)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-2018.2最新使用Scrapy爬取数据 + elasticSearch 存储并提供api + Django打造搜索引擎。
+2018.3最新使用Scrapy爬取数据 + elasticSearch 存储并提供api + Django打造搜索引擎。
 
 线上演示地址: http://search.mtianyan.cn
 
->本仓库为数据采集爬虫代码 搜索引擎Django网站代码请前往: https://github.com/mtianyan/mtianyanSearch
+>本仓库为数据采集爬虫代码的mysql版本:实现了将知乎伯乐在线拉勾网存入mysql
+
+- 搜索引擎Django网站代码请前往: https://github.com/mtianyan/mtianyanSearch
+- 全量版本存放入elasticSearch的版本代码: 请前往本仓库的分支ArticleSpider-elasticsearch进行获取
 
 ## Background:
 
-- 其实去年已经做过一遍这个，当做一次大作业来做的，很赶很不认真.
-- 这次我当做自己近期的一个个人小项目，算是比较认真完善的完成了这个搜索引擎。
 
 [原版视频课程地址:](https://coding.imooc.com/class/92.html)
 
@@ -29,3 +30,15 @@
 欢迎关注简书，star项目！谢谢！
 
 你的关注支持是我继续分享前进的动力。
+
+## 求打赏鼓励
+
+很高兴我写的文章（或我的项目代码）对你有帮助，请我吃包辣条吧！
+
+微信打赏:
+
+![mark](http://myphoto.mtianyan.cn/blog/180302/i52eHgilfD.png?imageslim)
+
+支付宝打赏:
+
+![mark](http://myphoto.mtianyan.cn/blog/180302/gDlBGemI60.jpg?imageslim)
