@@ -241,7 +241,10 @@ class ZhihuQuestionItem(scrapy.Item):
             content = "".join(self["content"])
         except BaseException:
             content = "无"
-        answer_num = extract_num("".join(self["answer_num"]))
+        try:
+            answer_num = extract_num("".join(self["answer_num"]))
+        except BaseException:
+            answer_num = 0
         comments_num = extract_num("".join(self["comments_num"]))
 
         if len(self["watch_user_num"]) == 2:
