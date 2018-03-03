@@ -138,8 +138,8 @@ class JobboleSpider(scrapy.Spider):
         item_loader.add_value("url_object_id", get_md5(response.url))
         item_loader.add_css("create_date", "p.entry-meta-hide-on-mobile::text")
         item_loader.add_value("front_image_url", [front_image_url])
-        # item_loader.add_css("praise_nums", ".vote-post-up h10::text")
-        praise_nums = response.css(".vote-post-up h10::text").extract()[0]
+        item_loader.add_css("praise_nums", ".vote-post-up h10::text")
+        # praise_nums = response.css(".vote-post-up h10::text").extract()[0]
         item_loader.add_css("comment_nums", "a[href='#article-comment'] span::text")
         item_loader.add_css("fav_nums", ".bookmark-btn::text")
         item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
@@ -147,7 +147,7 @@ class JobboleSpider(scrapy.Spider):
 
         # 调用这个方法来对规则进行解析生成item对象
         article_item = item_loader.load_item()
-        article_item.praise_nums = praise_nums
+        # article_item.praise_nums = praise_nums
 
         # 已经填充好了值调用yield传输至pipeline
         yield article_item
