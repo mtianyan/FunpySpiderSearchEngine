@@ -5,6 +5,7 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 import datetime
+import pickle
 import re
 
 from ArticleSpider.settings import SQL_DATETIME_FORMAT
@@ -22,6 +23,14 @@ es_article = connections.create_connection(ArticleType._doc_type.using)
 es_zhihu_question = connections.create_connection(ZhiHuQuestionType._doc_type.using)
 es_lagou = connections.create_connection(LagouType._doc_type.using)
 es_zhihu_anwser = connections.create_connection(ZhiHuAnswerType._doc_type.using)
+# redis实现抓取数据同步显示
+import redis
+redis_cli = redis.StrictRedis()
+## 设置数据初始值
+JOB_COUNT_INIT = 161042
+ZHIHU_COUNT_INIT = 173057
+JOBBOLE_COUNT_INIT = 5003
+
 
 
 class ArticlespiderItem(scrapy.Item):
@@ -255,7 +264,14 @@ class JobBoleArticleItem(scrapy.Item):
 
         # 在保存数据时便传入suggest
         article.suggest = gen_suggests(es_article,ArticleType._doc_type.index, ((article.title, 10), (article.tags, 7),(article.content, 3)))
-
+        if redis_cli.get("jobbole_count"):
+            jobbole_count = pickle.loads(redis_cli.get("jobbole_count"))
+            jobbole_count = jobbole_count + 1
+            jobbole_count = pickle.dumps(jobbole_count)
+            redis_cli.set("jobbole_count", jobbole_count)
+        else:
+            jobbole_count = pickle.dumps(JOBBOLE_COUNT_INIT)
+            redis_cli.set("jobbole_count",jobbole_count)
         article.save()
 
 
@@ -284,7 +300,10 @@ class ZhihuQuestionItem(scrapy.Item):
             self["content"] = remove_tags(self["content"])
         except BaseException:
             self["content"] = "无"
-        self["answer_num"] = extract_num("".join(self["answer_num"]))
+        try:
+            self["answer_num"] = extract_num("".join(self["answer_num"]))
+        except BaseException:
+            self["answer_num"] = 0
         self["comments_num"] = extract_num("".join(self["comments_num"]))
 
         if len(self["watch_user_num"]) == 2:
@@ -338,7 +357,14 @@ class ZhihuQuestionItem(scrapy.Item):
 
          # 在保存数据时便传入suggest
         zhihu.suggest = gen_suggests(es_zhihu_question,ZhiHuQuestionType._doc_type.index, ((zhihu.title, 10), (zhihu.topics, 7),(zhihu.content, 3)))
-
+        if redis_cli.get("zhihu_count"):
+            zhihu_count = pickle.loads(redis_cli.get("zhihu_count"))
+            zhihu_count = zhihu_count + 1
+            zhihu_count = pickle.dumps(zhihu_count)
+            redis_cli.set("zhihu_count",zhihu_count)
+        else:
+            zhihu_count = pickle.dumps(ZHIHU_COUNT_INIT)
+            redis_cli.set("zhihu_count",zhihu_count)
         zhihu.save()
 
 class ZhihuAnswerItem(scrapy.Item):
@@ -400,7 +426,14 @@ class ZhihuAnswerItem(scrapy.Item):
         # 在保存数据时便传入suggest
         zhihu.suggest = gen_suggests(es_zhihu_anwser,ZhiHuAnswerType._doc_type.index,
                                      ((zhihu.author_name, 10), (zhihu.content, 7)))
-
+        if redis_cli.get("zhihu_count"):
+            zhihu_count = pickle.loads(redis_cli.get("zhihu_count"))
+            zhihu_count = zhihu_count + 1
+            zhihu_count = pickle.dumps(zhihu_count)
+            redis_cli.set("zhihu_count",zhihu_count)
+        else:
+            zhihu_count = pickle.dumps(ZHIHU_COUNT_INIT)
+            redis_cli.set("zhihu_count",zhihu_count)
         zhihu.save()
 
 def remove_splash(value):
@@ -567,6 +600,13 @@ class LagouJobItem(scrapy.Item):
         # 在保存数据时便传入suggest
         job.suggest = gen_suggests(es_lagou, LagouType._doc_type.index,
                                      ((job.title, 10), (job.tags, 7), (job.job_advantage, 6),(job.job_desc,5),(job.job_addr, 4),(job.company_name,8),(job.degree_need,3),(job.job_city,9)))
-
+        if redis_cli.get("job_count"):
+            job_count = pickle.loads(redis_cli.get("job_count"))
+            job_count = job_count + 1
+            job_count = pickle.dumps(job_count)
+            redis_cli.set("job_count",job_count)
+        else:
+            job_count = pickle.dumps(JOB_COUNT_INIT)
+            redis_cli.set("job_count",job_count)
         job.save()
 
