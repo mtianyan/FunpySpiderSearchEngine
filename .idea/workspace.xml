@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a1f21fb-1263-423a-872d-5d62be4e108c" name="Default" comment="添加要饭码及仓库分支说明，希望有好心人给打赏">
+    <list default="true" id="3a1f21fb-1263-423a-872d-5d62be4e108c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py" afterPath="$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py" />
     </list>
     <ignored mask="*.gitignore" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -221,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520063865752</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="修复jobbole的点赞数bug。忘记为啥改成一个不对的版本了。">
+      <created>1520068007822</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1520068007822</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -258,7 +264,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="删除了冗余代码，修复了一部分字段xpath失效引起的bug" />
     <MESSAGE value="添加要饭码及仓库分支说明，希望有好心人给打赏" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加要饭码及仓库分支说明，希望有好心人给打赏" />
+    <MESSAGE value="修复jobbole的点赞数bug。忘记为啥改成一个不对的版本了。" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复jobbole的点赞数bug。忘记为啥改成一个不对的版本了。" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
