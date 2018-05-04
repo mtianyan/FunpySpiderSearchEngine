@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48296d6a-f832-4fe1-92bf-d0776fb55a31" name="Default" comment="添加redis中爬取数量的初始化与记录。">
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+    <list default="true" id="48296d6a-f832-4fe1-92bf-d0776fb55a31" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArticleSpider/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArticleSpider/utils/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,57 +18,12 @@
     <SUITE FILE_PATH="coverage/ArticleSpider_elasticsearch$es_zhihu.coverage" NAME="es_zhihu Coverage Results" MODIFIED="1517192857763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider/models" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="zhihu.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="82" column="105" selection-start-line="82" selection-start-column="105" selection-end-line="82" selection-end-column="105" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/task.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="671" selection-start-line="671" selection-end-line="671" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="1248" selection-start-line="1248" selection-end-line="1248" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="middleware.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/middleware.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="69" selection-start-line="69" selection-end-line="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/pipelines/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scraper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/core/scraper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="187" selection-start-line="187" selection-end-line="187" />
+            <state relative-caret-position="95">
+              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -99,10 +51,10 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/bole_num_init.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/spiders/zhihu_sel.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/ArticleSpider/utils/common.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/items.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -125,7 +77,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -133,21 +84,11 @@
               <item name="ArticleSpider-elasticsearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="ArticleSpider-elasticsearch" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ArticleSpider-elasticsearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ArticleSpider-elasticsearch" type="462c0819:PsiDirectoryNode" />
-              <item name="ArticleSpider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ArticleSpider-elasticsearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ArticleSpider-elasticsearch" type="462c0819:PsiDirectoryNode" />
-              <item name="ArticleSpider" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,11 +203,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520063329253</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="2018/5/04可用代码：修复知乎爬取问题。已测试成功。">
+      <created>1525439758112</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525439758112</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="676" y="0" width="697" height="735" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -276,7 +224,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32893" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.6182085" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18155198" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -300,7 +248,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加redis中爬取数量的初始化与记录。" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加redis中爬取数量的初始化与记录。" />
+    <MESSAGE value="2018/5/04可用代码：修复知乎爬取问题。已测试成功。" />
+    <option name="LAST_COMMIT_MESSAGE" value="2018/5/04可用代码：修复知乎爬取问题。已测试成功。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -435,7 +384,48 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md" />
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="82" column="105" selection-start-line="82" selection-start-column="105" selection-end-line="82" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12749">
+          <caret line="671" selection-start-line="671" selection-end-line="671" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23712">
+          <caret line="1248" selection-start-line="1248" selection-end-line="1248" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/pipelines/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/core/scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3268">
+          <caret line="187" selection-start-line="187" selection-end-line="187" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -638,9 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="145" selection-start-line="145" selection-end-line="145" />
-          <folding>
-            <element signature="e#193#206#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -653,21 +640,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="1197">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/pipelines/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="418">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/scrapy/core/scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
+        <state relative-caret-position="3268">
           <caret line="187" selection-start-line="187" selection-end-line="187" />
         </state>
       </provider>
@@ -695,22 +682,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/task.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="12749">
           <caret line="671" selection-start-line="671" selection-end-line="671" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonEnvs/articlespider3/Lib/site-packages/twisted/internet/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
+        <state relative-caret-position="23123">
           <caret line="1248" selection-start-line="1248" selection-end-line="1248" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state>
           <caret line="82" column="105" selection-start-line="82" selection-start-column="105" selection-end-line="82" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
         </state>
       </provider>
     </entry>
