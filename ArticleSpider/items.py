@@ -9,7 +9,7 @@ import pickle
 import re
 
 from ArticleSpider.settings import SQL_DATETIME_FORMAT
-from ArticleSpider.utils.common import extract_num
+from ArticleSpider.utils.common import extract_num, extract_num_include_dot
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Join
@@ -308,11 +308,11 @@ class ZhihuQuestionItem(scrapy.Item):
 
         if len(self["watch_user_num"]) == 2:
             watch_user_num_click = self["watch_user_num"]
-            self["watch_user_num"] = extract_num(watch_user_num_click[0])
-            self["click_num"] = extract_num(watch_user_num_click[1])
+            self["watch_user_num"] = extract_num_include_dot(watch_user_num_click[0])
+            self["click_num"] = extract_num_include_dot(watch_user_num_click[1])
         else:
             watch_user_num_click = self["watch_user_num"]
-            self["watch_user_num"] = extract_num(watch_user_num_click[0])
+            self["watch_user_num"] = extract_num_include_dot(watch_user_num_click[0])
             self["click_num"] = 0
 
         self["crawl_time"] = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)

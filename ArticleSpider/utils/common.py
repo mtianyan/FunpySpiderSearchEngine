@@ -69,5 +69,14 @@ def extract_num(text):
 
     return nums
 
+def extract_num_include_dot(text):
+    # 从包含,的字符串中提取出数字
+    text_num = text.replace(',', '')
+    try:
+        nums = int(text_num)
+    except:
+        nums = -1
+    return nums
+
 if __name__ == "__main__":
     print(get_md5("http://jobbole.com".encode("utf-8")))
