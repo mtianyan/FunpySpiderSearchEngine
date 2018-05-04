@@ -8,7 +8,7 @@ import datetime
 import re
 
 from ArticleSpider.settings import SQL_DATETIME_FORMAT
-from ArticleSpider.utils.common import extract_num
+from ArticleSpider.utils.common import extract_num, extract_num_include_dot
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Join
@@ -248,10 +248,10 @@ class ZhihuQuestionItem(scrapy.Item):
         comments_num = extract_num("".join(self["comments_num"]))
 
         if len(self["watch_user_num"]) == 2:
-            watch_user_num = extract_num(self["watch_user_num"][0])
-            click_num = extract_num(self["watch_user_num"][1])
+            watch_user_num = extract_num_include_dot(self["watch_user_num"][0])
+            click_num = extract_num_include_dot(self["watch_user_num"][1])
         else:
-            watch_user_num = extract_num(self["watch_user_num"][0])
+            watch_user_num = extract_num_include_dot(self["watch_user_num"][0])
             click_num = 0
 
         crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import datetime
 import json
 import re
 
@@ -25,7 +25,7 @@ class ZhihuSpider(scrapy.Spider):
     start_answer_url = "https://www.zhihu.com/api/v4/questions/{0}/answers?sort_by=default&include=data%5B%2A%5D.is_normal%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccollapsed_counts%2Creviewing_comments_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Cmark_infos%2Ccreated_time%2Cupdated_time%2Crelationship.is_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cupvoted_followees%3Bdata%5B%2A%5D.author.is_blocking%2Cis_blocked%2Cis_followed%2Cvoteup_count%2Cmessage_thread_token%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit={1}&offset={2}"
 
     phone = '+8618092671458'  # 手机号
-    password = 'ty158917'  # 密码
+    password = 'tdp158520'  # 密码
     client_id = 'c3cef7c66a1843f8b3a9e6a1e3160e20'
     headers = {
         'authorization': 'oauth ' + client_id,
@@ -73,14 +73,15 @@ class ZhihuSpider(scrapy.Spider):
 
             item_loader = ItemLoader(item=ZhihuQuestionItem(), response=response)
             item_loader.add_css("title", "h1.QuestionHeader-title::text")
-            item_loader.add_xpath("content", "//*[@class='QuestionHeader-detail']/div/div/span/text()")
+            item_loader.add_xpath("content",
+                                  "//*[@id='root']/div/main/div/div[1]/div[2]/div[1]/div[1]/div[2]/div/div/div/span/text()")
             item_loader.add_value("url", response.url)
             item_loader.add_value("zhihu_id", question_id)
             item_loader.add_css("answer_num", ".List-headerText span::text")
             item_loader.add_css("comments_num", ".QuestionHeader-Comment button::text")
             # 这里一次把一列值提出来
-            item_loader.add_css("watch_user_num", ".NumberBoard-itemValue::text")
-            item_loader.add_css("topics", ".QuestionHeader-topics .Popover div::text")
+            item_loader.add_css("watch_user_num", ".NumberBoard-itemValue ::text")
+            item_loader.add_css("topics", ".QuestionHeader-topics .Tag.QuestionTopic .Popover div::text")
 
             question_item = item_loader.load_item()
         else:
@@ -103,7 +104,7 @@ class ZhihuSpider(scrapy.Spider):
 
             question_item = item_loader.load_item()
         # 发起向后台具体answer的接口请求
-        yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers, callback=self.parse_answer)
+        # yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers, callback=self.parse_answer)
         yield question_item
 
     def parse_answer(self, reponse):
@@ -125,7 +126,7 @@ class ZhihuSpider(scrapy.Spider):
             answer_item["comments_num"] = answer["comment_count"]
             answer_item["create_time"] = answer["created_time"]
             answer_item["update_time"] = answer["updated_time"]
-            answer_item["crawl_time"] = datetime.datetime.now()
+            answer_item["crawl_time"] = datetime.now()
 
             yield answer_item
 
@@ -135,14 +136,30 @@ class ZhihuSpider(scrapy.Spider):
     def start_requests(self):
         return [
             scrapy.Request(
+                'https://www.zhihu.com/signup?next=%2F',
+                headers=self.headers,
+                callback=self.cap1)]
+
+    def cap1(self, response):
+        return [
+            scrapy.Request(
                 'https://www.zhihu.com/api/v3/oauth/captcha?lang=en',
                 headers=self.headers,
-                callback=self.login)]
+                callback=self.cap2)]
 
+    def cap2(self, response):
+        return [
+            scrapy.Request(
+                'https://www.zhihu.com/api/v3/oauth/captcha?lang=en',
+                headers=self.headers,
+                callback=self.login,
+                dont_filter=True)]
     def login(self, response):
-        captcha_info = json.loads(response.text)
-        if captcha_info['show_captcha']:  # 出现验证码
-            print('出现验证码')
+        # captcha_info = json.loads(response.text)
+        # print(response.text)
+        # if captcha_info['show_captcha']:  # 出现验证码
+        #     print('出现验证码')
+
         loginUrl = 'https://www.zhihu.com/api/v3/oauth/sign_in'
         timestamp = int(time.time() * 1000)
         fp = open('ArticleSpider/spiders/zhihu.js')

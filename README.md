@@ -1,11 +1,13 @@
-# 2018.3: ArticleSpider-mysql
+# 2018.5: ArticleSpider-mysql
 
 [![Build Status](https://travis-ci.org/mtianyan/hexoBlog-Github.svg?branch=master)](https://travis-ci.org/mtianyan/hexoBlog-Github)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-2018.3最新使用Scrapy爬取数据 + elasticSearch 存储并提供api + Django打造搜索引擎。
+2018.05月最新可用Scrapy爬取数据 + elasticSearch 存储并提供api + Django打造搜索引擎。
 
 线上演示地址: http://search.mtianyan.cn
+
+>elasticSearch数据量大之后太吃内存，养不起了，所以搜索服务暂停。
 
 >本仓库为数据采集爬虫代码的mysql版本:实现了将知乎伯乐在线拉勾网存入mysql
 
