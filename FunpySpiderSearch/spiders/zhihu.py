@@ -145,10 +145,10 @@ class ZhihuSpider(scrapy.Spider):
 
         browser.get("https://www.zhihu.com/signin")
         browser.find_element_by_css_selector(".SignFlow-accountInput.Input-wrapper input").send_keys(
-            "1147727180@qq.com")
+            "邮箱@qq.com")
         time.sleep(1)
         browser.find_element_by_css_selector(".SignFlow-password input").send_keys(
-            "zyy180926")
+            "密码")
         time.sleep(2)
         browser.find_element_by_css_selector(
             ".Button.SignFlow-submitButton").click()
