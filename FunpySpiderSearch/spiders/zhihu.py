@@ -126,7 +126,8 @@ class ZhihuSpider(scrapy.Spider):
             answer_item["content"] = answer["content"] if "content" in answer else None
             answer_item["praise_num"] = answer["voteup_count"]
             answer_item["comments_num"] = answer["comment_count"]
-            answer_item["url"] = answer["url"]
+            answer_item["url"] = "https://www.zhihu.com/question/{0}/answer/{1}".format(answer["question"]["id"],
+                                                                                        answer["id"])
             answer_item["create_time"] = answer["created_time"]
 
             answer_item["update_time"] = answer["updated_time"]
@@ -144,10 +145,10 @@ class ZhihuSpider(scrapy.Spider):
 
         browser.get("https://www.zhihu.com/signin")
         browser.find_element_by_css_selector(".SignFlow-accountInput.Input-wrapper input").send_keys(
-            "邮箱@qq.com")
+            "1147727180@qq.com")
         time.sleep(1)
         browser.find_element_by_css_selector(".SignFlow-password input").send_keys(
-            "密码")
+            "zyy180926")
         time.sleep(2)
         browser.find_element_by_css_selector(
             ".Button.SignFlow-submitButton").click()

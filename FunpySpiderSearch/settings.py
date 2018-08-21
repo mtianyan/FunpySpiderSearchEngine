@@ -94,7 +94,7 @@ ITEM_PIPELINES = {
 MYSQL_HOST = "127.0.0.1"
 MYSQL_DBNAME = "mtianyansearch"
 MYSQL_USER = "root"
-MYSQL_PASSWORD = ""
+MYSQL_PASSWORD = "密码"
 
 # 数据库时间格式
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"

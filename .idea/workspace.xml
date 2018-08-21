@@ -1,48 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59ba1f8b-3f7e-4c25-91e5-37db53c8f873" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ArticleSpider-mysql.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="59ba1f8b-3f7e-4c25-91e5-37db53c8f873" name="Default Changelist" comment="添加了Sql文件，将知乎回答中的url构造为更适合人的。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/items.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/middlewares.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/models/es_jobbole.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/models/es_lagou.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/models/es_zhihu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/pipelines.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/fang.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/lagou.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/zhihu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/spiders/zhihu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/common.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/cookies.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/index_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/login_zhihu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/zhihu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/zhihu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArticleSpider/utils/zhihu_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/articlespider-mysql.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/captcha.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cookies.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrapy.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/scrapy.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/chromedriver.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/fang_near.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/ghostdriver.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/selenium_demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/xici_ip.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FunpySpiderSearch/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FunpySpiderSearch/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py" beforeDir="false" afterPath="$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,8 +23,10 @@
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$common.coverage" NAME="common Coverage Results" MODIFIED="1534802576802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/utils" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$es_lagou.coverage" NAME="es_lagou Coverage Results" MODIFIED="1534802439295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/sites/lagou" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$zhihu_selenuim_test.coverage" NAME="zhihu_selenuim_test Coverage Results" MODIFIED="1534809202960" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/explore" />
+    <SUITE FILE_PATH="coverage/FunpySpiderSearch_Github$main.coverage" NAME="main Coverage Results" MODIFIED="1534865815413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$zhihuItem.coverage" NAME="zhihuItem Coverage Results" MODIFIED="1534788178648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1534849029234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/scrapy" />
+    <SUITE FILE_PATH="coverage/FunpySpiderSearch_Github$es_zhihu.coverage" NAME="es_zhihu Coverage Results" MODIFIED="1534865804127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$jobboleItem.coverage" NAME="jobboleItem Coverage Results" MODIFIED="1534794890900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/sites/jobbole" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$main.coverage" NAME="main Coverage Results" MODIFIED="1534853236920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FunpySpiderSearch$es_utils.coverage" NAME="es_utils Coverage Results" MODIFIED="1534794084470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FunpySpiderSearch/utils" />
@@ -148,30 +113,72 @@
     <session id="1274114528">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="md" value="1" />
-          <entry key="py" value="17" />
+          <entry key="py" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="1" />
-          <entry key="Python" value="17" />
+          <entry key="Python" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="11" />
+          <entry key="py" value="21" />
+          <entry key="txt" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="11" />
+          <entry key="PLAIN_TEXT" value="33" />
+          <entry key="Python" value="21" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+    </session>
+    <session id="474421387">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="13" />
+          <entry key="sql" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="13" />
+          <entry key="SQL" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="94" />
+          <entry key="sql" value="3" />
+          <entry key="txt" value="43" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="43" />
+          <entry key="Python" value="93" />
+          <entry key="SQL" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -182,8 +189,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="36" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="361">
+              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
               <folding>
                 <element signature="e#54#88#0" expanded="true" />
               </folding>
@@ -191,98 +198,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/jobbole.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/lagou.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#564#2638#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="149" column="17" lean-forward="true" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/items.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-              <folding>
-                <element signature="e#153#166#0" expanded="true" />
-                <element signature="e#255#336#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/middlewares.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/pipelines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="65" column="14" selection-start-line="65" selection-end-line="65" selection-end-column="14" />
+            <state relative-caret-position="514">
+              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="151" column="22" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/es_zhihu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="27" column="29" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -318,7 +256,6 @@
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/jobbole/__init__.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/jobbole/es_jobbole.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/spiders/jobbole.py" />
-        <option value="$PROJECT_DIR$/FunpySpiderSearch/spiders/lagou.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/lagou/es_lagou.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/jobbole/jobboleItem.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/lagou/lagouItem.py" />
@@ -331,12 +268,13 @@
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihu_sel.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu_sel.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/es_zhihu.py" />
-        <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/utils/common.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/explore/zhihu_selenuim_test.py" />
+        <option value="$PROJECT_DIR$/FunpySpiderSearch/spiders/lagou.py" />
+        <option value="$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/FunpySpiderSearch/settings.py" />
         <option value="$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py" />
+        <option value="$PROJECT_DIR$/FunpySpiderSearch/settings.py" />
       </list>
     </option>
   </component>
@@ -365,19 +303,17 @@
         <subPane>
           <expand>
             <path>
-              <item name="FunpySpiderSearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FunpySpiderSearch-Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FunpySpiderSearch-Github" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FunpySpiderSearch-Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FunpySpiderSearch-Github" type="462c0819:PsiDirectoryNode" />
               <item name="FunpySpiderSearch" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="FunpySpiderSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FunpySpiderSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="FunpySpiderSearch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FunpySpiderSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FunpySpiderSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="FunpySpiderSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
+              <item name="FunpySpiderSearch-Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -552,13 +488,21 @@
       <option name="presentableId" value="Default" />
       <updated>1534756791827</updated>
     </task>
+    <task id="LOCAL-00001" summary="全面重磅8.21时效重构——可用更新，强烈推荐！">
+      <created>1534857416653</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1534857416653</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="23" width="1280" height="1333" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18416801" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19386107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -572,7 +516,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33250415" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3316913" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32922825" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -610,6 +554,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="全面重磅8.21时效重构——可用更新，强烈推荐！" />
+    <option name="LAST_COMMIT_MESSAGE" value="全面重磅8.21时效重构——可用更新，强烈推荐！" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -622,6 +570,21 @@
           <url>file://$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/scrapy/crawler.py</url>
           <line>82</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py</url>
+          <line>108</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -688,26 +651,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
           <caret line="97" column="16" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="16" />
-          <folding>
-            <element signature="e#195#206#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-259200612/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="4649" column="6" selection-start-line="4649" selection-start-column="6" selection-end-line="4649" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-259200612/builtins.py" />
     <entry file="file://$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/elasticsearch_dsl/document.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
           <caret line="406" column="57" selection-start-line="406" selection-start-column="2" selection-end-line="406" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -718,13 +669,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/vdisk.py" />
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/15kankan.py" />
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/abc_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/baidupan.py" />
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/gitbook.py" />
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/book.py" />
@@ -740,13 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/scrapy/http/request/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/twisted/internet/defer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
@@ -759,16 +696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1273">
           <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/utils/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -793,9 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#53#64#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -803,9 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="16" column="24" lean-forward="true" selection-end-line="32" />
-          <folding>
-            <element signature="e#0#80#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -813,9 +734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="116" column="15" lean-forward="true" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -833,23 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/es_zhihu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="38" column="21" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/jobbole.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -857,25 +758,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/lagou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#564#2638#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-          <folding>
-            <element signature="e#153#166#0" expanded="true" />
-            <element signature="e#255#336#0" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="285">
+            <caret line="15" column="40" lean-forward="true" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -886,45 +775,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1235">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/abc_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/utils/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PyEnvs/funpyspidersearch/lib/python3.6/site-packages/scrapy/http/request/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/zhihuItem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="148" column="29" selection-start-line="148" selection-start-column="29" selection-end-line="148" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/lagou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1273">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/sites/zhihu/es_zhihu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="29" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="151" column="22" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="36" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="361">
+          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding>
             <element signature="e#54#88#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="65" column="14" selection-start-line="65" selection-end-line="65" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FunpySpiderSearch/spiders/zhihu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="149" column="17" lean-forward="true" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="514">
+          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
         </state>
       </provider>
     </entry>

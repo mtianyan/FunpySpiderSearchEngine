@@ -71,7 +71,7 @@ class ZhihuQuestionItem(scrapy.Item, MysqlItem, ElasticSearchItem):
                      crawl_time
                      )
                    VALUES (%s, %s, %s, %s, %s
-                   , %s, %s, %s, %s, %s
+                   , %s, %s, %s, %s, %s,
                    %s)
                    ON DUPLICATE KEY UPDATE
                    content=VALUES(content), answer_num=VALUES(answer_num), comments_num=VALUES(comments_num),
@@ -143,10 +143,10 @@ class ZhihuAnswerItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         insert_sql = """
                    insert into zhihu_answer(url_object_id, answer_id, question_id, author_id, author_name,
                    content, praise_num, comments_num,url,create_time,
-                   update_time, crawl_time,
-                     ) VALUES (%s, %s, %s, %s, %s,
+                   update_time, crawl_time)
+                   VALUES (%s, %s, %s, %s, %s,
                       %s, %s, %s, %s, %s,
-                      %s,%s)
+                      %s, %s)
                      ON DUPLICATE KEY UPDATE
                      content=VALUES(content), comments_num=VALUES(comments_num), praise_num=VALUES(praise_num),
                      update_time=VALUES(update_time), author_name=VALUES(author_name)
