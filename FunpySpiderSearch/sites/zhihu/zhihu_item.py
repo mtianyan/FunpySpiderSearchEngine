@@ -1,3 +1,6 @@
+__author__ = 'mtianyan'
+__date__ = '2018/8/20 07:28'
+
 import datetime
 
 import scrapy
@@ -13,8 +16,6 @@ from FunpySpiderSearch.utils.es_utils import generate_suggests
 from FunpySpiderSearch.utils.mysql_utils import fun_sql_insert
 from FunpySpiderSearch.utils.string_util import exclude_none
 
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 07:28'
 es_zhihu_question = connections.create_connection(ZhiHuQuestionIndex)
 es_zhihu_answer = connections.create_connection(ZhiHuAnswerIndex)
 ZHIHU_QUESTION_COUNT_INIT = 0
@@ -131,14 +132,26 @@ class ZhihuAnswerItem(scrapy.Item, MysqlItem, ElasticSearchItem):
     crawl_time = scrapy.Field()
 
     def clean_data(self):
+        try:
+            self["praise_num"] = extract_num("".join(self["praise_num"]))
+        except BaseException:
+            self["praise_num"] = 0
+        self["comments_num"] = extract_num("".join(self["comments_num"]))
+
         self["create_time"] = datetime.datetime.fromtimestamp(
             self["create_time"]).strftime(SQL_DATETIME_FORMAT)
-        self["update_time"] = datetime.datetime.fromtimestamp(
-            self["update_time"]).strftime(SQL_DATETIME_FORMAT)
+        try:
+            self["update_time"] = datetime.datetime.fromtimestamp(
+                self["update_time"]).strftime(SQL_DATETIME_FORMAT)
+        except:
+            self["update_time"] = self["create_time"]
+
         self["crawl_time"] = self["crawl_time"].strftime(SQL_DATETIME_FORMAT)
         self["content"] = remove_tags(self["content"])
 
     def save_to_mysql(self):
+
+        self.clean_data()
         # 插入知乎answer表的sql语句
         insert_sql = """
                    insert into zhihu_answer(url_object_id, answer_id, question_id, author_id, author_name,
@@ -151,7 +164,6 @@ class ZhihuAnswerItem(scrapy.Item, MysqlItem, ElasticSearchItem):
                      content=VALUES(content), comments_num=VALUES(comments_num), praise_num=VALUES(praise_num),
                      update_time=VALUES(update_time), author_name=VALUES(author_name)
                """
-        self.clean_data()
         sql_params = (
             self["url_object_id"], self["answer_id"], self["question_id"], self["author_id"], self["author_name"],
             self["content"], self["praise_num"], self["comments_num"], self["url"], self["create_time"],

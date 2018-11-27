@@ -1,8 +1,8 @@
-import datetime
-import re
-
 __author__ = 'mtianyan'
 __date__ = '2018/8/20 07:40'
+
+import datetime
+import re
 
 
 def str2date(value):

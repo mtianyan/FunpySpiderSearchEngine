@@ -8,6 +8,7 @@
 #     https://doc.scrapy.org/en/latest/topics/settings.html
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+from config import SQL_USER, SQL_PASSWORD, SQL_DBNAME
 
 BOT_NAME = 'FunpySpiderSearch'
 
@@ -92,9 +93,9 @@ ITEM_PIPELINES = {
 
 # 数据库配置信息
 MYSQL_HOST = "127.0.0.1"
-MYSQL_DBNAME = "mtianyansearch"
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "密码"
+MYSQL_DBNAME = SQL_DBNAME
+MYSQL_USER = SQL_USER
+MYSQL_PASSWORD = SQL_PASSWORD
 
 # 数据库时间格式
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
