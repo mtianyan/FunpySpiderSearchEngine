@@ -66,8 +66,8 @@ COOKIES_ENABLED = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'FunpySpiderSearch.pipelines.FunpyspidersearchPipeline': 300,
-    'FunpySpiderSearch.pipelines.MysqlTwistedPipeline': 400,
-    # 'FunpySpiderSearch.pipelines.ElasticSearchPipeline': 500,
+    # 'FunpySpiderSearch.pipelines.MysqlTwistedPipeline': 400,
+    'FunpySpiderSearch.pipelines.ElasticSearchPipeline': 500,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

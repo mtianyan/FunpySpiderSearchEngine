@@ -104,7 +104,7 @@ class ZhihuQuestionItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         zhihu.crawl_time = self["crawl_time"]
 
         # 在保存数据时便传入suggest
-        zhihu.suggest = generate_suggests(es_zhihu_question, "zhihu_question",
+        zhihu.suggest = generate_suggests(es_zhihu_question,
                                           ((zhihu.title, 10), (zhihu.topics, 7), (zhihu.content, 5)))
 
         real_time_count('zhihu_question_count', ZHIHU_QUESTION_COUNT_INIT)
@@ -192,7 +192,7 @@ class ZhihuAnswerItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         zhihu.crawl_time = self["crawl_time"]
 
         # 在保存数据时便传入suggest
-        zhihu.suggest = generate_suggests(es_zhihu_answer, "zhihu_answer",
+        zhihu.suggest = generate_suggests(es_zhihu_answer,
                                           ((zhihu.author_name, 10), (zhihu.content, 7)))
         real_time_count("zhihu_answer_count", ZHIHU_QUESTION_COUNT_INIT)
         zhihu.save()

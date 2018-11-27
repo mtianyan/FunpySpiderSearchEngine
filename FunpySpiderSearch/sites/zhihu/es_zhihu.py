@@ -37,7 +37,7 @@ class ZhiHuAnswerIndex(Document):
     author_name = Keyword()
 
     content = Text(analyzer="ik_smart")
-    praise_num = Integer()
+    praise_num = Keyword()
     comments_num = Integer()
     url = Keyword()
     create_time = Date()

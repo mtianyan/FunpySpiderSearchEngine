@@ -43,7 +43,7 @@ scrapy crawl jobbole
 
 ## TODO:
 
-> 1. 扩展更多网站(承接爬虫+搜索项目: 小到毕设大到公司) 2. 网站端自适应移动 3. Mysql持久化数据，与Django Model结合
+>扩展更多网站(此处承接爬虫+搜索项目:小可到毕设);网站端自适应移动;Mysql持久化数据结合Django管理
 
 ## 致谢 [原版视频课程地址:](https://coding.imooc.com/class/92.html)
 

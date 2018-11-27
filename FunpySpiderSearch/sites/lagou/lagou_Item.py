@@ -185,7 +185,7 @@ class LagouJobItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         job.company_url = self["company_url"]
         job.crawl_time = self['crawl_time']
 
-        job.suggest = generate_suggests(es_lagou_job, "lagou_job",
+        job.suggest = generate_suggests(es_lagou_job,
                                         ((job.title, 10), (job.tags, 7), (job.job_advantage, 6), (job.job_desc, 3),
                                          (job.job_addr, 5), (job.company_name, 8), (job.degree_need, 4),
                                          (job.job_city, 9)))
