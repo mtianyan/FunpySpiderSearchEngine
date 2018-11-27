@@ -1,3 +1,6 @@
+__author__ = 'mtianyan'
+__date__ = '2018/8/20 05:46'
+
 import datetime
 import re
 import scrapy
@@ -12,8 +15,6 @@ from FunpySpiderSearch.utils.common import real_time_count
 from FunpySpiderSearch.utils.es_utils import generate_suggests
 from FunpySpiderSearch.utils.mysql_utils import fun_sql_insert
 
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 05:46'
 es_lagou_job = connections.create_connection(LagouJobIndex)
 JOB_COUNT_INIT = 0
 
@@ -67,6 +68,13 @@ class LagouJobItem(scrapy.Item, MysqlItem, ElasticSearchItem):
     crawl_update_time = scrapy.Field()
 
     def clean_data(self):
+
+        """try catch 大法修复tags问题"""
+        try:
+            self["tags"] = self["tags"]
+        except KeyError:
+            self["tags"] = ""
+
         match_obj1 = re.match("经验(\d+)-(\d+)年", self['work_years_min'])
         match_obj2 = re.match("经验应届毕业生", self['work_years_min'])
         match_obj3 = re.match("经验不限", self['work_years_min'])
@@ -125,13 +133,13 @@ class LagouJobItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         self["crawl_time"] = self["crawl_time"].strftime(SQL_DATETIME_FORMAT)
 
     def save_to_mysql(self):
+        self.clean_data()
         insert_sql = """
                     insert into lagou_job(title, url, url_object_id, salary_min, salary_max, job_city, work_years_min, work_years_max, degree_need,
                     job_type, publish_time, job_advantage, job_desc, job_addr, company_name, company_url,
                     tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     ON DUPLICATE KEY UPDATE salary_min=VALUES(salary_min), salary_max=VALUES(salary_max), job_desc=VALUES(job_desc)
                 """
-        self.clean_data()
         sql_params = (
             self["title"],
             self["url"],
@@ -177,7 +185,7 @@ class LagouJobItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         job.company_url = self["company_url"]
         job.crawl_time = self['crawl_time']
 
-        job.suggest = generate_suggests(es_lagou_job, "lagou_job",
+        job.suggest = generate_suggests(es_lagou_job,
                                         ((job.title, 10), (job.tags, 7), (job.job_advantage, 6), (job.job_desc, 3),
                                          (job.job_addr, 5), (job.company_name, 8), (job.degree_need, 4),
                                          (job.job_city, 9)))

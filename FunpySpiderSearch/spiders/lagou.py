@@ -2,7 +2,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from datetime import datetime
 
-from FunpySpiderSearch.sites.lagou.lagouItem import LagouJobItem, LagouJobItemLoader
+from FunpySpiderSearch.sites.lagou.lagou_Item import LagouJobItem, LagouJobItemLoader
 from FunpySpiderSearch.utils.common import get_md5
 
 

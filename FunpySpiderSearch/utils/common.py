@@ -1,10 +1,7 @@
-import pickle
-
-import redis
-
 __author__ = 'mtianyan'
 __date__ = '2018/8/20 08:05'
-
+import pickle
+import redis
 import re
 import hashlib
 

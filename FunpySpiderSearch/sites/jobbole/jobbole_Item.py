@@ -1,3 +1,6 @@
+__author__ = 'mtianyan'
+__date__ = '2018/8/20 05:47'
+
 import datetime
 import re
 
@@ -18,8 +21,6 @@ from FunpySpiderSearch.utils.string_util import return_value, get_nums
 # 与ElasticSearch进行连接,生成搜索建议
 es_jobbole_blog = connections.create_connection(JobboleBlogIndex)
 
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 05:47'
 JOBBOLE_COUNT_INIT = 0
 
 
@@ -109,7 +110,7 @@ class JobboleBlogItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         blog.tags = self["tags"]
         blog.meta.id = self["url_object_id"]
         # 在保存数据时必须传入suggest
-        blog.suggest = generate_suggests(es_jobbole_blog, JobboleBlogIndex,
+        blog.suggest = generate_suggests(es_jobbole_blog,
                                          ((blog.title, 10), (blog.tags, 6), (blog.content, 4)))
         real_time_count('jobbole_blog_count', JOBBOLE_COUNT_INIT)
         blog.save()

@@ -1,7 +1,7 @@
-from elasticsearch_dsl import connections, Document, Keyword, Text, Integer, Date, Completion, analyzer
-
 __author__ = 'mtianyan'
 __date__ = '2017/6/25 15:45'
+
+from elasticsearch_dsl import connections, Document, Keyword, Text, Integer, Date, Completion, analyzer
 
 connections.create_connection(hosts=["localhost"])
 
@@ -37,7 +37,7 @@ class ZhiHuAnswerIndex(Document):
     author_name = Keyword()
 
     content = Text(analyzer="ik_smart")
-    praise_num = Integer()
+    praise_num = Keyword()
     comments_num = Integer()
     url = Keyword()
     create_time = Date()

@@ -16,7 +16,7 @@ class FunpyspidersearchItem(scrapy.Item):
 
 
 """
-具体的items，请看sitems文件夹中的网站items
+具体的items，请看sites文件夹中的网站items
 域名+内容+Item
 """
 
