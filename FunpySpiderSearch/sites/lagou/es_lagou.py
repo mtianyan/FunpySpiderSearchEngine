@@ -1,7 +1,7 @@
-from elasticsearch_dsl import connections, Document, Text, Keyword, Integer, Date, Completion, analyzer
-
 __author__ = 'mtianyan'
 __date__ = '2017/6/25 10:18'
+
+from elasticsearch_dsl import connections, Document, Text, Keyword, Integer, Date, Completion, analyzer
 
 connections.create_connection(hosts=["localhost"])
 

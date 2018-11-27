@@ -2,8 +2,7 @@ import scrapy
 from scrapy.http import Request
 from urllib import parse
 
-from FunpySpiderSearch.sites.jobbole.jobboleItem import JobboleBlogItem, JobboleBlogItemLoader
-
+from FunpySpiderSearch.sites.jobbole.jobbole_Item import JobboleBlogItem, JobboleBlogItemLoader
 from FunpySpiderSearch.utils.common import get_md5
 
 

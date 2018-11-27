@@ -7,8 +7,9 @@ from urllib import parse
 import scrapy
 from scrapy.loader import ItemLoader
 
-from FunpySpiderSearch.sites.zhihu.zhihuItem import ZhihuQuestionItem, ZhihuAnswerItem
+from FunpySpiderSearch.sites.zhihu.zhihu_item import ZhihuQuestionItem, ZhihuAnswerItem
 from FunpySpiderSearch.utils.common import get_md5
+from config import ZHIHU_PHONE, ZHIHU_PASSWORD
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -17,15 +18,11 @@ class ZhihuSpider(scrapy.Spider):
     start_urls = ['https://www.zhihu.com/']
 
     # question的第一页answer的请求url
-    start_answer_url = "https://www.zhihu.com/api/v4/questions/{0}/answers?" \
-                       "sort_by=default&include=data%5B%2A%5D.is_normal%2Cis_sticky%2" \
-                       "Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccollapsed_counts%2" \
-                       "Creviewing_comments_count%2Ccan_comment%2Ccontent%2Ceditable_content%2" \
-                       "Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Cmark_infos%2" \
-                       "Ccreated_time%2Cupdated_time%2Crelationship.is_author%2Cvoting%2C" \
-                       "is_thanked%2Cis_nothelp%2Cupvoted_followees%3Bdata%5B%2A%5D.author.is_blocking%2" \
-                       "Cis_blocked%2Cis_followed%2Cvoteup_count%2Cmessage_thread_token%2Cbadge%5B%3F%28type%3" \
-                       "Dbest_answerer%29%5D.topics&limit={1}&offset={2}"
+    start_answer_url = "https://www.zhihu.com/api/v4/questions/{0}/answers?include=data%5B%2A%5D.is_normal%2" \
+                       "Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2" \
+                       "Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2" \
+                       "Cis_thanked%2Cis_nothelp%2Cis_labeled%3Bdata%5B%2A%5D.mark_infos%5B%2A%5D.url%3Bdata%5B%2" \
+                       "A%5D.author.follower_count%2Cbadge%5B%2A%5D.topics&limit={1}&offset={2}&sort_by=default"
 
     headers = {
         "HOST": "www.zhihu.com",
@@ -107,54 +104,67 @@ class ZhihuSpider(scrapy.Spider):
                              callback=self.parse_answer)
         yield question_item
 
-    def parse_answer(self, reponse):
+    def parse_answer(self, response):
         # 处理question的answer
-        ans_json = json.loads(reponse.text)
+        ans_json = json.loads(response.text)
         is_end = ans_json["paging"]["is_end"]
         next_url = ans_json["paging"]["next"]
 
         # 提取answer的具体字段
         for answer in ans_json["data"]:
-            answer_item = ZhihuAnswerItem()
+            url_object_id = get_md5(url=answer["url"])
+            answer_id = answer["id"]
+            question_id = answer["question"]["id"]
+            author_id = answer["author"]["id"] if "id" in answer["author"] else None
+            author_name = answer["author"]["name"] if "name" in answer["author"] else None
+            content = answer["excerpt"] if "excerpt" in answer else ""
+            really_url = "https://www.zhihu.com/question/{0}/answer/{1}".format(answer["question"]["id"],
+                                                                                answer["id"])
+            create_time = answer["created_time"]
+            updated_time = answer["updated_time"]
 
-            answer_item["url_object_id"] = get_md5(url=answer["url"])
-            answer_item["answer_id"] = answer["id"]
-            answer_item["question_id"] = answer["question"]["id"]
-            answer_item["author_id"] = answer["author"]["id"] if "id" in answer["author"] else None
-            answer_item["author_name"] = answer["author"]["name"] if "name" in answer["author"] else None
-
-            answer_item["content"] = answer["content"] if "content" in answer else None
-            answer_item["praise_num"] = answer["voteup_count"]
-            answer_item["comments_num"] = answer["comment_count"]
-            answer_item["url"] = "https://www.zhihu.com/question/{0}/answer/{1}".format(answer["question"]["id"],
-                                                                                        answer["id"])
-            answer_item["create_time"] = answer["created_time"]
-
-            answer_item["update_time"] = answer["updated_time"]
-            answer_item["crawl_time"] = datetime.now()
-
-            yield answer_item
-
+            yield scrapy.Request(really_url, headers=self.headers,
+                                 callback=self.parse_answer_end, meta={'url_object_id': url_object_id,
+                                                                       'answer_id': answer_id,
+                                                                       'question_id': question_id,
+                                                                       'author_id': author_id,
+                                                                       'author_name': author_name,
+                                                                       'content': content,
+                                                                       'create_time': create_time,
+                                                                       'updated_time': updated_time})
         if not is_end:
             yield scrapy.Request(next_url, headers=self.headers, callback=self.parse_answer)
+
+    def parse_answer_end(self, response):
+        answer_item = ZhihuAnswerItem()
+        answer_item["url_object_id"] = response.meta.get("url_object_id", "")
+        answer_item["answer_id"] = response.meta.get("answer_id", "")
+        answer_item["question_id"] = response.meta.get("question_id", "")
+        answer_item["author_id"] = response.meta.get("author_id", "")
+        answer_item["author_name"] = response.meta.get("author_name", "")
+        answer_item["content"] = response.meta.get("content", "")
+        answer_item["url"] = response.meta.get("url", "")
+        answer_item["create_time"] = response.meta.get("create_time", "")
+        answer_item["update_time"] = response.meta.get("updated_time", "")
+        answer_item["comments_num"] = response.css(".Button.VoteButton.VoteButton--up::text")[0].extract()
+        answer_item["praise_num"] = response.css(".Button.ContentItem-action.Button--plain."
+                                                 "Button--withIcon.Button--withLabel::text")[0].extract()
+        answer_item["crawl_time"] = datetime.now()
+        yield answer_item
 
     def start_requests(self):
         from selenium import webdriver
         import time
-        browser = webdriver.Chrome()
+        browser = webdriver.PhantomJS()
 
         browser.get("https://www.zhihu.com/signin")
-        browser.find_element_by_css_selector(".SignFlow-accountInput.Input-wrapper input").send_keys(
-            "邮箱@qq.com")
+        browser.find_element_by_css_selector(".SignFlow-accountInput.Input-wrapper input").send_keys(ZHIHU_PHONE)
         time.sleep(1)
-        browser.find_element_by_css_selector(".SignFlow-password input").send_keys(
-            "密码")
+        browser.find_element_by_css_selector(".SignFlow-password input").send_keys(ZHIHU_PASSWORD)
         time.sleep(2)
-        browser.find_element_by_css_selector(
-            ".Button.SignFlow-submitButton").click()
+        browser.find_element_by_css_selector(".Button.SignFlow-submitButton").click()
         time.sleep(3)
         browser.get("https://www.zhihu.com/")
-
         time.sleep(6)
         zhihu_cookies = browser.get_cookies()
         print(zhihu_cookies)
