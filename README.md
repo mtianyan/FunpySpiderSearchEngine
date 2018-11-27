@@ -5,7 +5,9 @@
 [![Build Status](https://travis-ci.org/mtianyan/hexoBlog-Github.svg?branch=master)](https://travis-ci.org/mtianyan/hexoBlog-Github)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-线上演示地址(近期重构更新中): http://search.mtianyan.cn(运行在旧笔记本冒充服务器上，不定时开启，如有强烈体验愿望，QQ: 1147727180)
+线上演示地址: http://search.mtianyan.cn 
+
+>运行在旧笔记本版冒充服务器上使用frp内网穿透，不定时开启，如有强烈体验愿望, QQ: 1147727180
 
 **本仓库为爬虫端数据入库ElasticSearch代码**,实现整个搜索需要结合Django网站端项目 https://github.com/mtianyan/mtianyanSearch
 
