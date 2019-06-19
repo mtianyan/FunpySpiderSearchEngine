@@ -1,6 +1,6 @@
 .idea
 config.py
-FunpySpiderSearch/cookies/zhihu/*
+FunpySpiderSearch/cookies/zhihu/*.zhihu
 config.py
 
 # Windows image file caches

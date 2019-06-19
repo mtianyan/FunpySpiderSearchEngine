@@ -1,11 +1,11 @@
-# 2018.11.28更新: FunpySpiderSearchEngine-ElasticSearch or Mysql 搜索引擎
+# 2019.06.19 维护: FunpySpiderSearchEngine-ElasticSearch or Mysql 搜索引擎
 
->Scrapy1.5.1(爬取数据) + ElasticSearch6.3.2(存储数据并提供对外Restful Api) + Django 打造搜索引擎网站 (可配置数据存入Mysql)
+>Scrapy1.6.0(爬取数据) + ElasticSearch6.8.0(存储数据并提供对外Restful Api) + Django 打造搜索引擎网站 (可配置数据存入Mysql)
 
 [![Build Status](https://travis-ci.org/mtianyan/hexoBlog-Github.svg?branch=master)](https://travis-ci.org/mtianyan/hexoBlog-Github)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-线上演示地址: http://search.mtianyan.cn 
+线上演示地址: 服务器到期暂无线上地址
 
 >运行在旧笔记本版冒充服务器上使用frp内网穿透，不定时开启，如有强烈体验愿望, QQ: 1147727180
 
@@ -13,13 +13,13 @@
 
 ## 可用功能:
 
-1. 伯乐在线，拉勾职位，知乎爬虫存入Mysql & 存入ElasticSearch
+1. 伯乐在线，知乎爬虫存入Mysql & 存入ElasticSearch (拉勾暂不可用)
 2. 全文搜索(需结合网站端一起使用)，搜索建议，我的搜索记录，搜索词高亮标红，搜索结果底部分页
 3. Redis实现的实时三站已爬取数目展示，热门搜索Top-5
 
 ## 项目外部依赖
 
-ElasticSearch6.3.2 + ElasticSearch-analysis-ik(中文分词) + Redis + Mysql
+ElasticSearch6.8.0 + ElasticSearch-analysis-ik(中文分词) + Redis + Mysql
 
 ## 长期维护更新
 
@@ -27,7 +27,7 @@ ElasticSearch6.3.2 + ElasticSearch-analysis-ik(中文分词) + Redis + Mysql
 
 ## 如何开始使用？
 
-安装ElasticSearch6.3.2,配置ElasticSearch-analysis-ik插件,安装Redis(可选配置ElasticSearch-head)
+安装ElasticSearch6.8.0,配置ElasticSearch-analysis-ik插件,安装Redis(可选配置ElasticSearch-head)
 
 ```
 git clone https://github.com/mtianyan/FunpySpiderSearchEngine
@@ -43,21 +43,18 @@ scrapy crawl jobbole
 
 ## TODO:
 
->扩展更多网站(此处承接爬虫+搜索项目:小可到毕设);网站端自适应移动;Mysql持久化数据结合Django管理
+等待空闲，工作了太忙了
 
 ## 致谢 [原版视频课程地址:](https://coding.imooc.com/class/92.html)
 
 >感谢Bobby老师的这门课程，通过这门课程学到了很多很多，自己在踩坑填坑，持续更新版本，时效更新，解决的时候，收获的不只有知识，我觉得更多是解决问题的能力。
 
-简书相关文集地址(已过期，只有一定参考意义，最好的读物是源码!):https://www.jianshu.com/nb/11202633
 
 ## 关于我
 
 一个学过php，做过安卓，摸过渗透，看过点前端，会写一点Python，最后发现自己啥也不会的肥宅在哭泣，欢迎加入有趣的Python群：619417153
 
-[简书](https://www.jianshu.com/u/db9a7a0daa1f)
-
-**欢迎关注简书，star项目！谢谢！你的关注支持是我继续分享前进的动力**
+**欢迎关注star项目！谢谢！你的关注支持是我继续分享前进的动力**
 
 ## 求打赏鼓励
 
