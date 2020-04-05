@@ -1,4 +1,4 @@
-# 2019.06.19 维护: FunpySpiderSearchEngine-ElasticSearch or Mysql 搜索引擎
+# 维护: FunpySpiderSearchEngine-ElasticSearch or Mysql 搜索引擎
 
 >Scrapy1.6.0(爬取数据) + ElasticSearch6.8.0(存储数据并提供对外Restful Api) + Django 打造搜索引擎网站 (可配置数据存入Mysql)
 
