@@ -5,9 +5,7 @@
 [![Build Status](https://travis-ci.org/mtianyan/hexoBlog-Github.svg?branch=master)](https://travis-ci.org/mtianyan/hexoBlog-Github)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-线上演示地址: 服务器到期暂无线上地址
-
->运行在旧笔记本版冒充服务器上使用frp内网穿透，不定时开启，如有强烈体验愿望, QQ: 1147727180
+线上演示地址: https://search.funpython.cn/
 
 **本仓库为爬虫端数据入库ElasticSearch代码**,实现整个搜索需要结合Django网站端项目 https://github.com/mtianyan/mtianyanSearch
 
@@ -49,10 +47,6 @@ scrapy crawl jobbole
 
 >感谢Bobby老师的这门课程，通过这门课程学到了很多很多，自己在踩坑填坑，持续更新版本，时效更新，解决的时候，收获的不只有知识，我觉得更多是解决问题的能力。
 
-
-## 关于我
-
-一个学过php，做过安卓，摸过渗透，看过点前端，会写一点Python，最后发现自己啥也不会的肥宅在哭泣，欢迎加入有趣的Python群：619417153
 
 **欢迎关注star项目！谢谢！你的关注支持是我继续分享前进的动力**
 
