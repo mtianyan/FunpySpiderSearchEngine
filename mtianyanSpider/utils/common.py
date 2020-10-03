@@ -1,11 +1,9 @@
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 08:05'
 import pickle
 import redis
 import re
 import hashlib
 
-redis_cli = redis.StrictRedis()
+from config import REDIS_HOST, REDIS_PASSWORD
 
 
 def get_md5(url):
@@ -39,6 +37,7 @@ def extract_num_include_dot(text):
 
 
 def real_time_count(key, init):
+    redis_cli = redis.Redis(host=REDIS_HOST, password=REDIS_PASSWORD)
     if redis_cli.get(key):
         count = pickle.loads(redis_cli.get(key))
         count = count + 1
@@ -47,7 +46,3 @@ def real_time_count(key, init):
     else:
         count = pickle.dumps(init)
         redis_cli.set(key, count)
-
-
-if __name__ == "__main__":
-    print(get_md5("http://jobbole.com".encode("utf-8")))

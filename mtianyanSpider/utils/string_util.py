@@ -1,6 +1,3 @@
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 07:40'
-
 import datetime
 import re
 
@@ -10,7 +7,7 @@ def str2date(value):
     try:
         value.strip().replace("·", "").strip()
         create_date = datetime.datetime.strptime(value, "%Y/%m/%d").date()
-    except Exception as e:
+    except Exception:
         create_date = datetime.datetime.now().date()
 
     return create_date

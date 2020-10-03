@@ -2,14 +2,30 @@ import json
 import os
 import re
 from datetime import datetime
-from os import path
+from pathlib import Path
 from urllib import parse
 import scrapy
 from scrapy.loader import ItemLoader
+from mtianyanSpider.sites.zhihu.zhihu_item import ZhihuQuestionItem, ZhihuAnswerItem
+from mtianyanSpider.utils.common import get_md5
 
-from FunpySpiderSearch.sites.zhihu.zhihu_item import ZhihuQuestionItem, ZhihuAnswerItem
-from FunpySpiderSearch.utils.common import get_md5
-from config import ZHIHU_PHONE, ZHIHU_PASSWORD
+
+def parse_answer_end(response):
+    answer_item = ZhihuAnswerItem()
+    answer_item["url_object_id"] = response.meta.get("url_object_id", "")
+    answer_item["answer_id"] = response.meta.get("answer_id", "")
+    answer_item["question_id"] = response.meta.get("question_id", "")
+    answer_item["author_id"] = response.meta.get("author_id", "")
+    answer_item["author_name"] = response.meta.get("author_name", "")
+    answer_item["content"] = response.meta.get("content", "")
+    answer_item["url"] = response.meta.get("url", "")
+    answer_item["create_time"] = response.meta.get("create_time", "")
+    answer_item["update_time"] = response.meta.get("updated_time", "")
+    answer_item["comments_num"] = response.css(".Button.VoteButton.VoteButton--up::text")[0].extract()
+    answer_item["praise_num"] = response.css(".Button.ContentItem-action.Button--plain."
+                                             "Button--withIcon.Button--withLabel::text")[0].extract()
+    answer_item["crawl_time"] = datetime.now()
+    yield answer_item
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -33,10 +49,10 @@ class ZhihuSpider(scrapy.Spider):
 
     custom_settings = {
         "COOKIES_ENABLED": True,
-        "DOWNLOAD_DELAY": 1.5,
+        "DOWNLOAD_DELAY": 0.3,
     }
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         """
         提取出html页面中的所有url 并跟踪这些url进行一步爬取
         如果提取的url中格式为 /question/xxx 就下载之后直接进入解析函数
@@ -65,7 +81,8 @@ class ZhihuSpider(scrapy.Spider):
             match_obj = re.match("(.*zhihu.com/question/(\d+))(/|$).*", response.url)
             if match_obj:
                 question_id = int(match_obj.group(2))
-
+            else:
+                question_id = -1
             item_loader = ItemLoader(item=ZhihuQuestionItem(), response=response)
 
             item_loader.add_value("url_object_id", get_md5(response.url))
@@ -85,6 +102,8 @@ class ZhihuSpider(scrapy.Spider):
             match_obj = re.match("(.*zhihu.com/question/(\d+))(/|$).*", response.url)
             if match_obj:
                 question_id = int(match_obj.group(2))
+            else:
+                question_id = -1
 
             item_loader = ItemLoader(item=ZhihuQuestionItem(), response=response)
             item_loader.add_xpath("title",
@@ -124,57 +143,21 @@ class ZhihuSpider(scrapy.Spider):
             updated_time = answer["updated_time"]
 
             yield scrapy.Request(really_url, headers=self.headers,
-                                 callback=self.parse_answer_end, meta={'url_object_id': url_object_id,
-                                                                       'answer_id': answer_id,
-                                                                       'question_id': question_id,
-                                                                       'author_id': author_id,
-                                                                       'author_name': author_name,
-                                                                       'content': content,
-                                                                       'create_time': create_time,
-                                                                       'updated_time': updated_time})
+                                 callback=parse_answer_end, meta={'url_object_id': url_object_id,
+                                                                  'answer_id': answer_id,
+                                                                  'question_id': question_id,
+                                                                  'author_id': author_id,
+                                                                  'author_name': author_name,
+                                                                  'url': really_url,
+                                                                  'content': content,
+                                                                  'create_time': create_time,
+                                                                  'updated_time': updated_time})
         if not is_end:
             yield scrapy.Request(next_url, headers=self.headers, callback=self.parse_answer)
 
-    def parse_answer_end(self, response):
-        answer_item = ZhihuAnswerItem()
-        answer_item["url_object_id"] = response.meta.get("url_object_id", "")
-        answer_item["answer_id"] = response.meta.get("answer_id", "")
-        answer_item["question_id"] = response.meta.get("question_id", "")
-        answer_item["author_id"] = response.meta.get("author_id", "")
-        answer_item["author_name"] = response.meta.get("author_name", "")
-        answer_item["content"] = response.meta.get("content", "")
-        answer_item["url"] = response.meta.get("url", "")
-        answer_item["create_time"] = response.meta.get("create_time", "")
-        answer_item["update_time"] = response.meta.get("updated_time", "")
-        answer_item["comments_num"] = response.css(".Button.VoteButton.VoteButton--up::text")[0].extract()
-        answer_item["praise_num"] = response.css(".Button.ContentItem-action.Button--plain."
-                                                 "Button--withIcon.Button--withLabel::text")[0].extract()
-        answer_item["crawl_time"] = datetime.now()
-        yield answer_item
-
     def start_requests(self):
-        from selenium import webdriver
-        import time
-        browser = webdriver.PhantomJS()
-
-        browser.get("https://www.zhihu.com/signin")
-        browser.find_element_by_css_selector(".SignFlow-accountInput.Input-wrapper input").send_keys(ZHIHU_PHONE)
-        time.sleep(1)
-        browser.find_element_by_css_selector(".SignFlow-password input").send_keys(ZHIHU_PASSWORD)
-        time.sleep(2)
-        browser.find_element_by_css_selector(".Button.SignFlow-submitButton").click()
-        time.sleep(3)
-        browser.get("https://www.zhihu.com/")
-        time.sleep(6)
-        zhihu_cookies = browser.get_cookies()
-        print(zhihu_cookies)
-        cookie_dict = {}
-        import pickle
-        for cookie in zhihu_cookies:
-            base_path = path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'cookies')
-            f = open(base_path + "/zhihu/" + cookie['name'] + '.zhihu', 'wb')
-            pickle.dump(cookie, f)
-            f.close()
-            cookie_dict[cookie['name']] = cookie['value']
-        browser.close()
-        return [scrapy.Request(url=self.start_urls[0], dont_filter=True, cookies=cookie_dict, headers=self.headers)]
+        cookie_path = os.path.join(Path(__file__).parent.parent, "cookies/zhihu.cookie")
+        with open(cookie_path) as fr:
+            cookie = fr.read()
+        self.headers["cookie"] = cookie
+        return [scrapy.Request(url=self.start_urls[0], headers=self.headers, dont_filter=True)]

@@ -1,23 +1,14 @@
-__author__ = 'mtianyan'
-__date__ = '2018/8/20 07:28'
-
 import datetime
 
 import scrapy
-from elasticsearch_dsl import connections
-from scrapy.loader.processors import MapCompose
+from itemloaders.processors import MapCompose
 from w3lib.html import remove_tags
+from mtianyanSpider.items import MysqlItem, ElasticSearchItem
+from mtianyanSpider.settings import SQL_DATETIME_FORMAT
+from mtianyanSpider.sites.zhihu.es_zhihu import ZhiHuQuestionIndex, ZhiHuAnswerIndex
+from mtianyanSpider.utils.common import extract_num, extract_num_include_dot, real_time_count
+from mtianyanSpider.utils.string_util import exclude_none
 
-from FunpySpiderSearch.items import MysqlItem, ElasticSearchItem
-from FunpySpiderSearch.settings import SQL_DATETIME_FORMAT
-from FunpySpiderSearch.sites.zhihu.es_zhihu import ZhiHuQuestionIndex, ZhiHuAnswerIndex
-from FunpySpiderSearch.utils.common import extract_num, extract_num_include_dot, real_time_count
-from FunpySpiderSearch.utils.es_utils import generate_suggests
-from FunpySpiderSearch.utils.mysql_utils import fun_sql_insert
-from FunpySpiderSearch.utils.string_util import exclude_none
-
-es_zhihu_question = connections.create_connection(ZhiHuQuestionIndex)
-es_zhihu_answer = connections.create_connection(ZhiHuAnswerIndex)
 ZHIHU_QUESTION_COUNT_INIT = 0
 ZHIHU_ANSWER_COUNT_INIT = 0
 
@@ -103,10 +94,6 @@ class ZhihuQuestionItem(scrapy.Item, MysqlItem, ElasticSearchItem):
 
         zhihu.crawl_time = self["crawl_time"]
 
-        # 在保存数据时便传入suggest
-        zhihu.suggest = generate_suggests(es_zhihu_question,
-                                          ((zhihu.title, 10), (zhihu.topics, 7), (zhihu.content, 5)))
-
         real_time_count('zhihu_question_count', ZHIHU_QUESTION_COUNT_INIT)
         zhihu.save()
 
@@ -190,25 +177,9 @@ class ZhihuAnswerItem(scrapy.Item, MysqlItem, ElasticSearchItem):
 
         zhihu.update_time = self["update_time"]
         zhihu.crawl_time = self["crawl_time"]
-
-        # 在保存数据时便传入suggest
-        zhihu.suggest = generate_suggests(es_zhihu_answer,
-                                          ((zhihu.author_name, 10), (zhihu.content, 7)))
         real_time_count("zhihu_answer_count", ZHIHU_QUESTION_COUNT_INIT)
         zhihu.save()
 
     def help_fields(self):
         for field in self.field_list:
             print(field, "= scrapy.Field()")
-
-
-if __name__ == '__main__':
-    instance = ZhihuAnswerItem()
-    instance1 = ZhihuQuestionItem()
-    print(instance.help_fields())
-    print("*" * 30)
-    print("self.data_clean()")
-    sql, params = fun_sql_insert(field_list=instance.field_list, duplicate_key_update=instance.duplicate_key_update,
-                                 table_name=instance.table_name)
-    print(sql)
-    print(params)

@@ -1,8 +1,3 @@
-.idea
-config.py
-FunpySpiderSearch/cookies/zhihu/*.zhihu
-config.py
-
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -226,3 +221,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# My Ignore
+.idea
+config.py
+utils/node_modules
+
+./mtianyanSpider/spiders/*.cookies

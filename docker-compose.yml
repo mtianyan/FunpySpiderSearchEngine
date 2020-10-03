@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mtianyan_scrapy:
+    restart: always
+    stdin_open: true
+    build: .
+    volumes:
+      - .:/PROJECT_ROOT
+    networks:
+      - search-spider
+    command: scrapy crawl zhihu
+
+networks:
+  search-spider:
+   external:
+      name: search-spider
