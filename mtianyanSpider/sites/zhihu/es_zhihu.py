@@ -12,7 +12,7 @@ class ZhiHuQuestionIndex(Document):
     topics = Text(analyzer="ik_max_word")
     url = Keyword()
     title = Text(analyzer="ik_max_word")
-
+    title_keyword = Keyword()
     content = Text(analyzer="ik_max_word")
     answer_num = Integer()
     comments_num = Integer()

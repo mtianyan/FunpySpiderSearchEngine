@@ -91,6 +91,7 @@ class ZhihuQuestionItem(scrapy.Item, MysqlItem, ElasticSearchItem):
         zhihu.watch_user_num = self["watch_user_num"]
         zhihu.click_num = self["click_num"]
         zhihu.url = self["url"]
+        zhihu.title_keyword = self["title"]
 
         zhihu.crawl_time = self["crawl_time"]
 
