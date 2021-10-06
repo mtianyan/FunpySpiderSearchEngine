@@ -23,7 +23,7 @@ pyOpenSSL==18.0.0
 python-dateutil==2.7.3
 queuelib==1.5.0
 redis==2.10.6
-Scrapy==1.5.1
+Scrapy==1.8.1
 selenium==3.14.0
 service-identity==17.0.0
 six==1.11.0
