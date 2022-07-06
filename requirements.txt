@@ -16,7 +16,7 @@ ipaddress==1.0.23
 itemadapter==0.1.0
 itemloaders==1.0.3
 jmespath==0.10.0
-lxml==4.5.2
+lxml==4.9.1
 parsel==1.6.0
 Pillow==7.2.0
 Protego==0.1.16
