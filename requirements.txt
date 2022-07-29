@@ -33,7 +33,7 @@ queuelib==1.5.0
 redis==3.5.3
 requests==2.24.0
 requests-toolbelt==0.9.1
-Scrapy==2.3.0
+Scrapy==2.6.2
 selenium==3.141.0
 service-identity==18.1.0
 six==1.15.0
